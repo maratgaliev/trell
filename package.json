@@ -25,6 +25,9 @@
     "url": "https://github.com/maratgaliev/trell/issues"
   },
   "homepage": "https://github.com/maratgaliev/trell#readme",
+  "devDependencies": {
+    "qs": ">=6.0.4"
+  },
   "dependencies": {
     "chalk": "^4.0.0",
     "clear": "^0.1.0",
