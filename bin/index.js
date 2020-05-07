@@ -5,7 +5,7 @@ const clear = require('clear');
 const datefns = require('date-fns');
 const interactions = require('../lib/interactions');
 const Haikunator = require('haikunator');
-
+const inquirer = require('inquirer');
 const figlet = require('figlet');
 const board = require('../lib/board');
 const repo = require('../lib/repo');
@@ -26,11 +26,20 @@ console.log(
 
 const run = async () => {
   const workingDir = await interactions.askGitDetails();
+  let comments = Array();
+  let statuses = Array();
+  
+  comments.push(new inquirer.Separator(' = COMMITS = '));
+  
   repo.getCommits(workingDir.repo).then(status => {
-    const descr = status.all.map((val) => { return val.message }).join('\n');
-    const commits = await interactions.askCommitsChoose(options);
+    statuses = status.all.map((val) => { return `${val.message} (${datefns.format(datefns.parseISO(val.date), 'dd.MM.yyyy')}) | ${val.hash.substring(0,7)} | ${val.author_name} (${val.author_email})` });
+    statuses.forEach(element => comments.push({ name: element }));
 
-    board.createRelease(datefns.format(new Date(), 'dd.MM.yyyy') + " - " + haikunator.haikunate(), descr);
+    const commitsAnswers = interactions.askCommitsChoose(statuses);
+    commitsAnswers.then((data) => {
+      const descr = data.commits.join('\n');
+      board.createRelease(datefns.format(new Date(), 'dd.MM.yyyy') + " - " + haikunator.haikunate(), descr);
+    });
   });
 };
 
