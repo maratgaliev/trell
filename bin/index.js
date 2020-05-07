@@ -28,6 +28,8 @@ const run = async () => {
   const workingDir = await interactions.askGitDetails();
   repo.getCommits(workingDir.repo).then(status => {
     const descr = status.all.map((val) => { return val.message }).join('\n');
+    const commits = await interactions.askCommitsChoose(options);
+
     board.createRelease(datefns.format(new Date(), 'dd.MM.yyyy') + " - " + haikunator.haikunate(), descr);
   });
 };
