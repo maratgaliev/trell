@@ -1,6 +1,6 @@
 {
   "name": "trell",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Easy generate release ticket on Trello based on your git commits",
   "main": "bin/index.js",
   "scripts": {
