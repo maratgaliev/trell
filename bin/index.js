@@ -32,7 +32,7 @@ const run = async () => {
   comments.push(new inquirer.Separator(' = COMMITS = '));
   
   repo.getCommits(workingDir.repo).then(status => {
-    statuses = status.all.map((val) => { return `${val.message} (${datefns.format(datefns.parseISO(val.date), 'dd.MM.yyyy')}) | ${val.hash.substring(0,7)} | ${val.author_name} (${val.author_email})` });
+    statuses = status.all.map((val) => { return `- ${val.message} (${datefns.format(datefns.parseISO(val.date), 'dd.MM.yyyy')}) | ${val.hash.substring(0,7)} | ${val.author_name} (${val.author_email})` });
     statuses.forEach(element => comments.push({ name: element }));
 
     const commitsAnswers = interactions.askCommitsChoose(statuses);
