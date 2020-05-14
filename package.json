@@ -1,6 +1,6 @@
 {
   "name": "trell",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Easy generate release ticket on Trello based on your git commits",
   "main": "bin/index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/maratgaliev/trell.git"
+    "url": "git+https://github.com/mg-javascript/trell.git"
   },
   "bin": {
     "trell": "./bin/index.js"
